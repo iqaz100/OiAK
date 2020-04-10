@@ -1,22 +1,21 @@
+
 SYSEXIT = 1;
 SYSCALL32 = 0x80
 EXIT_SUCCES = 0
 
 .data
-result: 
-        .long 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 
 menu_option_msg: .string "Wybierz opcje: 1. Dodawanie 2.Odejmowanie 3.Mnozenie 4. Dzielenie "
 firstNumberMsg: .string "Podaj pierwsza liczbe "
 secondNumberMsg: .string "Podaj druga liczbe "
-testPrint: .string "test\n"
 menuOption: .ascii ""
 formatScan: .string "%d"
-number_1: .float 0
-number_2: .float 0
-inputFormat: .ascii "%f"
+number_1: .double 0
+number_2: .double 0
+inputFormat: .ascii "%lf"
 optionFormat: .string "%c"
-outputFormat: .ascii "%.6f\n"
+outputFormat: .string "%.15lf\n"
+result: .double 0
 
 .text
 .global _start
@@ -40,9 +39,11 @@ pushl $menuOption
 pushl $optionFormat
 call scanf
 
-fld number_2
+fldl number_2
 fst %st(1)
-fld number_1
+fldl number_1
+
+xor %eax, %eax
 
 movb menuOption, %al
 cmpb $'1', %al
@@ -56,6 +57,17 @@ je mult
 
 cmpb $'4', %al
 je div
+
+print:
+fstl (result)     # Wrzucenie wyniku na do result
+pushl result+4
+pushl result
+pushl $outputFormat
+call printf
+
+movl $SYSEXIT, %eax
+movl $EXIT_SUCCES, %ebx
+int $SYSCALL32
 
 add:
 fadd %st(1), %st(0)
@@ -72,12 +84,3 @@ jmp print
 div:
 fdiv %st(1), %st(0)
 jmp print
-
-print:
-fstl (%esp)     # Wrzucenie wyniku na stos
-pushl $outputFormat
-call printf
-
-movl $SYSEXIT, %eax
-movl $EXIT_SUCCES, %ebx
-int $SYSCALL32
