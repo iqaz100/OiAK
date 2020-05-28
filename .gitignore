@@ -4,3 +4,7 @@
 !.gitignore
 !README.md
 !Lab[0-9][0-9]/
+!Projekt/
+!*.cpp
+!*.h
+!*.txt
