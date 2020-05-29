@@ -1,0 +1,5 @@
+Sciezka:0 1 8 4 6 2 11 9 7 5 3 10 
+Dlugosc drogi: 264
+
+Pomiary czasu
+1. 1285529
