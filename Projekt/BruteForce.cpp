@@ -197,6 +197,15 @@ void BruteForce::run(int wybor2)
 		delete readMachine;
 		ptr = 0;
 
+		//JESLI NIE ZAKONCZONO OSTATNIEGO POWTORZENIA TO PONOWNE WCZYTANIE DANYCH
+		if (wykPrzejsc <= count) {
+			readMachine = new ReadFromFile(fileName);
+			cityCount = readMachine->getSizeArray();
+			visited1 = readMachine->getArrayVisited();
+			wagiArray = readMachine->getArray2DValues();
+			road = new int[cityCount];
+			roadTemp = new int[cityCount];
+		}
 	}
 }
 
@@ -220,7 +229,6 @@ BruteForce::BruteForce(std::string name, int count, int wybor)
 	drogaTemp = city = startCity = ptr = 0;
 	threadsCount = cityCount;
 }
-
 
 BruteForce::~BruteForce()
 {

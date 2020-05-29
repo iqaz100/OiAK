@@ -35,7 +35,7 @@ void SaveToFile::write(std::string path, int droga, int time, int size)
 		file.close();
 	}
 	else {
-		std::cout << "Nie udalo sie uzyskac dostepu do pliku!" << std::endl;
+		std::cout << "Brak dostepu do pliku." << std::endl;
 	}
 		
 }
@@ -52,7 +52,7 @@ void SaveToFile::write(int time)
 		file.close();
 	}
 	else {
-		std::cout << "Nie udalo sie uzyskac dostepu do pliku!" << std::endl;
+		std::cout << "Brak dostepu do pliku." << std::endl;
 	}
 }
 
