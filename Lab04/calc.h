@@ -6,9 +6,6 @@
 #define LAB4_CALC_H
 #include "vectorClass.h"
 
-
-void testMet();
-
 void sumSIMD(struct vector a, struct vector b, struct vector *result);
 void subSIMD(struct vector a, struct vector b, struct vector *result);
 void mulSIMD(struct vector a, struct vector b, struct vector *result);

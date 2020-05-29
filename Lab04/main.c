@@ -2,9 +2,7 @@
 #include "calc.h"
 #include <string.h>
 
-#define N 8192
-
-const int Na = 2048;
+#define N 4096
 
 int repeats = 10;
 
@@ -64,13 +62,12 @@ void testSIMD(){
         }
         tSIMD.divTime +=((double) clock() - startTime);
 
-        tSIMD.sumTime = tSIMD.sumTime/repeats/N;
-        tSIMD.subTime = tSIMD.subTime/repeats/N;
-        tSIMD.mulTime = tSIMD.mulTime/repeats/N;
-        tSIMD.divTime = tSIMD.divTime/repeats/N;
-
+        tSIMD.sumTime = tSIMD.sumTime/repeats;
+        tSIMD.subTime = tSIMD.subTime/repeats;
+        tSIMD.mulTime = tSIMD.mulTime/repeats;
+        tSIMD.divTime = tSIMD.divTime/repeats;
     }
-    saveToFile("SIMD8192", tSIMD);
+    saveToFile("SIMD4096", tSIMD);
 }
 
 
@@ -79,41 +76,40 @@ void testSISD(){
     for(int i=0; i<repeats;i++){
         startTime = clock();
         for(int j=0;j<N;j++){
-            sumSISD(vec[j],vec2[j],&resultSum);
-            //printf("%u", j);
+            sumSISD(vec[j],vec2[j],&resultSum[j]);
         }
         tSISD.sumTime +=((double) clock() - startTime);
 
         startTime = clock();
         for(int j=0;j<N;j++){
-            subSISD(vec[j],vec2[j],&resultSub);
+            subSISD(vec[j],vec2[j],&resultSub[j]);
         }
         tSISD.subTime +=((double) clock() - startTime);
 
         startTime = clock();
         for(int j=0;j<N;j++){
-            mulSISD(vec[j],vec2[j],&resultMul);
+            mulSISD(vec[j],vec2[j],&resultMul[j]);
         }
         tSISD.mulTime +=((double) clock() - startTime);
 
         startTime = clock();
         for(int j=0;j<N;j++){
-            divSISD(vec[j],vec2[j],&resultDiv);
+            divSISD(vec[j],vec2[j],&resultDiv[j]);
         }
         tSISD.divTime +=((double) clock() - startTime);
 
-        tSISD.sumTime = tSISD.sumTime/repeats/N;
-        tSISD.subTime = tSISD.subTime/repeats/N;
-        tSISD.mulTime = tSISD.mulTime/repeats/N;
-        tSISD.divTime = tSISD.divTime/repeats/N;
+        tSISD.sumTime = tSISD.sumTime/repeats;
+        tSISD.subTime = tSISD.subTime/repeats;
+        tSISD.mulTime = tSISD.mulTime/repeats;
+        tSISD.divTime = tSISD.divTime/repeats;
 
     }
-    saveToFile("SISD8192",tSISD);
+    saveToFile("SISD4096",tSISD);
 }
 
 int main() {
     fillVectorArray();
     testSIMD();
-    //testSISD();
+    testSISD();
     return 0;
 }

@@ -9,6 +9,15 @@ float generateNumber(){
     return x;
 }
 
+vector createVector(){
+    vector vec;
+    vec.a = generateNumber();
+    vec.b = generateNumber();
+    vec.c = generateNumber();
+    vec.d = generateNumber();
+    return vec;
+}
+
 vector createUserVector(float a, float b, float c, float d){
     vector vec;
     vec.a = a;
@@ -23,13 +32,4 @@ void printVector(vector vec){
     printf("%.6f", vec.b);
     printf("%.6f", vec.c);
     printf("%.6f", vec.d);
-}
-
-vector createVector(){
-    vector vec;
-    vec.a = generateNumber();
-    vec.b = generateNumber();
-    vec.c = generateNumber();
-    vec.d = generateNumber();
-    return vec;
 }

@@ -4,10 +4,6 @@
 
 #include "calc.h"
 
-void testMet(){
-
-}
-
 void sumSIMD(struct vector a, struct vector b, struct vector *result) {
     asm(
     "movaps %1,%%xmm0;"
@@ -16,7 +12,6 @@ void sumSIMD(struct vector a, struct vector b, struct vector *result) {
     "movaps %%xmm0,%0;"
     :"=m" (*result)
     :"m" (a), "m" (b));
-    //printf("%.6f", result);
 }
 
 void subSIMD(struct vector a, struct vector b, struct vector *result) {

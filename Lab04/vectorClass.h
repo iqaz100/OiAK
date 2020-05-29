@@ -8,8 +8,6 @@
 #include <time.h>
 #include <stdio.h>
 
-//const int  N = 2000;
-
 typedef struct vector{
     float a;
     float b;
